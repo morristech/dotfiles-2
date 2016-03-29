@@ -1,6 +1,6 @@
 # get the number of methods in a dex-file
 function dex_method_count() {
-  cat $1 | head -c 92 | tail -c 4 | hexdump -e '1/4 "%d\n"'
+  cat $1 | head -c 84 | tail -c 4 | hexdump -e '1/4 "%d\n"'
 }
 
 # get the number of methods in a dex file by package
@@ -87,5 +87,5 @@ function adball() {
 
 # screenshot:
 function capture() {
-  adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > ./$1.png
+  adb $2 shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > ./$1.png
 }

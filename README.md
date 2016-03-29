@@ -4,12 +4,15 @@ Requires [homebrew](https://github.com/Homebrew/homebrew) and uses the [homesick
 
 ### Installation
 
+Copy and paste the code below to install dependencies.
+
 ```sh
 # Install home-brew dependencies
 brew install vim
 brew install zsh
 brew install zsh-syntax-highlighting
 brew install z
+brew install diff-so-fancy
 
 # Install oh-my-zsh
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh

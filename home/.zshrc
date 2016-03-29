@@ -26,6 +26,9 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+export NVM_DIR="/Users/david.voiss/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 source `brew --prefix`/etc/profile.d/z.sh
 source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
