@@ -44,7 +44,6 @@
 	re = reset
 	rh = reset --hard HEAD
 	rs = reset --soft HEAD
-	clear-merged = branch --merged | grep -v "\*" | xargs -n 1 git branch -d
 [credential]
 	helper = osxkeychain
 [help]
