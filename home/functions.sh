@@ -89,3 +89,29 @@ function adball() {
 function capture() {
   adb $2 shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > ./$1.png
 }
+
+# resize video using ffmpeg and make into GIF
+function ffmpeg_resize() {
+  video=$1
+  resize=$2
+  output=$3
+
+  # default message if not set
+  if [ ! "$video" ]; then
+    echo "No video file specified."
+    echo "ffmpeg_resize arguments: 'video-file' 'scale' 'output'. Scale is specified as width:height OR width:-1."
+    return -1
+  fi
+  
+  if [ ! "$resize" ]; then
+    echo "Resize must be specified as: width:height OR width:-1."
+    return -1
+  fi
+
+  # default to score-details if app_link is not set
+  if [ ! "$output" ]; then
+    output="resize.gif"
+  fi
+
+  ffmpeg -i $video -vf scale=$resize $output
+}

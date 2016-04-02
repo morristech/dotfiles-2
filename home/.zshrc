@@ -33,20 +33,20 @@ source `brew --prefix`/etc/profile.d/z.sh
 source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Add custom aliases
-if [ -f `pwd`/aliases.sh ]; then
-    source `pwd`/aliases.sh
+if [ -f ~/aliases.sh ]; then
+    source ~/aliases.sh
 else
     echo "could not find extra aliases."
 fi
 
 # Add custom functions
-if [ -f `pwd`/functions.sh ]; then
-    source `pwd`/functions.sh
+if [ -f ~/functions.sh ]; then
+    source ~/functions.sh
 else
     echo "could not find extra functions."
 fi
 
 # Add any local stuff which isn't committed to the repo:
-if [ -f `pwd`/ignored.sh ]; then
-    source `pwd`/ignored.sh
+if [ -f ~/ignored.sh ]; then
+    source ~/ignored.sh
 fi
