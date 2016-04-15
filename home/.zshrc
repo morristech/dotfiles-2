@@ -79,3 +79,7 @@ bindkey -s "^[Om" "-"
 bindkey -s "^[Oj" "*"
 bindkey -s "^[Oo" "/"
 bindkey -s "^[OX" "="
+
+# reverse history search
+bindkey -v
+bindkey '^R' history-incremental-search-backward

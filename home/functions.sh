@@ -74,7 +74,13 @@ function emu() {
   fi
 }
 
+# pass text input to connected android device/emulator
+function adbi() {
+  adb shell input text $1
+}
+
 # run an adb command on all devices found by "adb devices"
+# source: http://stackoverflow.com/questions/17882474/running-adb-commands-on-all-connected-devices
 function adball() {
   # -t  = print command before running, 
   # -J% = replace the '%' with the value from the left side 
@@ -85,33 +91,47 @@ function adball() {
       adb -s % "$@"
 }
 
-# screenshot:
+# capture android screenshot:
 function capture() {
-  adb $2 shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > ./$1.png
+  filename=$1
+
+  # default filename if not set
+  if [ ! "$filename" ]; then
+      filename="screen"
+  fi
+
+  adb $2 shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > ./$filename.png
+}
+
+# capture android screenshot and open it:
+function captureo() {
+  capture "screen" && open "screen.png"
 }
 
 # resize video using ffmpeg and make into GIF
 function ffmpeg_resize() {
   video=$1
-  resize=$2
+  width=$2
   output=$3
 
   # default message if not set
   if [ ! "$video" ]; then
     echo "No video file specified."
-    echo "ffmpeg_resize arguments: 'video-file' 'scale' 'output'. Scale is specified as width:height OR width:-1."
+    echo
+    echo "Usage:"
+    echo "ffmpeg_resize video-file (required) width (required) output-file (optional)"
     return -1
   fi
   
-  if [ ! "$resize" ]; then
-    echo "Resize must be specified as: width:height OR width:-1."
+  if [ ! "$width" ]; then
+    echo "Resize width must be specified. Height will be resized to maintain aspect ratio."
     return -1
   fi
 
   # default to score-details if app_link is not set
   if [ ! "$output" ]; then
-    output="resize.gif"
+    output="output.gif"
   fi
 
-  ffmpeg -i $video -vf scale=$resize $output
+  ffmpeg -i $video -vf scale=$width:-1 $output
 }
