@@ -91,8 +91,8 @@ function adball() {
       adb -s % "$@"
 }
 
-# capture android screenshot:
-function capture() {
+# private function
+function __get_filename() {
   filename=$1
 
   # default filename if not set
@@ -100,12 +100,23 @@ function capture() {
       filename="screen"
   fi
 
+  echo $filename
+}
+
+# capture android screenshot:
+function adbcap() {
+  filename=$( __get_filename $1 )
   adb $2 shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > ./$filename.png
 }
 
-# capture android screenshot and open it:
-function captureo() {
-  capture "screen" && open "screen.png"
+# capture android screenshot and resize it:
+function capsize() {
+  filename=$( __get_filename $1 )
+  size=$2
+  if [ ! "$size" ]; then
+    size=360
+  fi
+  adbcap $filename && sips --resampleWidth $size $filename.png
 }
 
 # resize video using ffmpeg and make into GIF
