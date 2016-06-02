@@ -21,10 +21,13 @@ source $ZSH/oh-my-zsh.sh
 
 # User customization below:
 
+unsetopt correct_all
+setopt correct
 setopt no_share_history
 unsetopt share_history
 
 export ANDROID_HOME=~/android-sdk
+export ANDROID_NDK="$ANDROID_HOME/ndk-bundle"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
